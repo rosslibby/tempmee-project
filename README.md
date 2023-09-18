@@ -20,7 +20,7 @@ This application utilizes the following:
 7. Run the application using `npm start` or `yarn start`
 
 **Example .env**
-```
+```bash
 PORT=8080
 DATABASE_URL=mongodb+srv://<user>:<password>@<cluster>.mongodb.net/<database>
 ```
@@ -29,15 +29,17 @@ DATABASE_URL=mongodb+srv://<user>:<password>@<cluster>.mongodb.net/<database>
 
 ## Routes
 
-### User `/users`
+## User `/users`
 
 **Create a user**
-`POST /users`
+```bash
+POST /users
+```
 
 Sending a `POST` request to the `/users` endpoint will create a user account. _The password will not be hashed; please use test data only._
 
 Request:
-```
+```bash
 curl -X POST \
   -H 'Content-Type: application/json' \
   -d '{\
@@ -49,7 +51,7 @@ curl -X POST \
 
 Response:
 
-```
+```json
 {
   "address": null,
   "id": "6508a8b2d5415ec7e9c14de5",
@@ -71,7 +73,7 @@ Headers:
 Sending a `GET` request to the `/users/orders` endpoint will respond with a list of the specified user's orders. Pass the `useremail` header to specify the user account for which orders are requested.
 
 Request:
-```
+```bash
 curl http://localhost:{port}/users/orders \
   -H 'useremail: john.doe@test.com'
 ```
@@ -79,19 +81,23 @@ curl http://localhost:{port}/users/orders \
 Headers:
   - `useremail: {email_address}`
 
+## User `/users`
+
 **View list of books**
-`GET /books`
+```bash
+GET /books
+```
 
 Sending a `GET` request to the `/books` endpoint will return a list of all available books.
 
 Request:
-```
+```bash
 curl http://localhost:{port}/books
 ```
 
 Response:
-```
-"books": [
+```json
+[
   {
     "id": "9508a8b2d5415ec7e9c14de5",
     "title": "Call of the Wild",
@@ -111,13 +117,41 @@ Response:
 ]
 ```
 
+**Get book by ID**
+```bash
+GET /books/{id}
+```
+
+Sending a `GET` request to `/books/{id}`, specifying the ID of an existing book, will return all of that book's data.
+
+Request:
+```bash
+curl http://localhost:{port}/books/65085f739542369c3328307d
+```
+
+Response:
+```json
+{
+  "id": "65085f739542369c3328307d",
+  "title": "Call of the Wild",
+  "isbn": "9788838439018",
+  "price": 1899,
+  "author": "Jack London",
+  "orderIDs": []
+},
+```
+
+## Order `/orders`
+
 **Create an order**
-`POST /orders`
+```bash
+POST /orders
+```
 
 Sending a `POST` request to the `/orders` endpoint will create a new order.
 
 Request:
-```
+```bash
 curl -X POST \
   -H 'Content-Type: application/json' \
   -d '{\
@@ -129,7 +163,7 @@ curl -X POST \
 
 Response:
 
-```
+```json
 {
   "id": "6508a8b2d5415ec7e9c14de5",
   "userEmail": "john.doe@test.com",
@@ -160,3 +194,59 @@ Response:
 Params:
   - `email`: string, required
   - `password`: string, required
+
+**Get a user's order history**
+```bash
+GET /orders
+```
+
+Sending a `GET` request to `/orders`, specifying the user's email as the `useremail` header, will return all orders for the given user.
+
+Request:
+```bash
+curl http://localhost:{port}/orders \
+  -H 'useremail: john.doe@test.com'
+```
+
+Response:
+```json
+[
+  {
+    "id": "6508a8b2d5415ec7e9c14de5",
+    "userEmail": "john.doe@test.com",
+    "bookIDs": ["65085f739542369c3328307d"],
+    "books": [
+      {
+        "id": "65085f739542369c3328307d",
+        "title": "Call of the Wild",
+        "isbn": "9788838439018",
+        "price": 1899,
+        "author": "Jack London",
+        "orderIDs": []
+      }
+    ],
+    "total": 1899,
+    "createdAt": "2023-09-18T21:05:30.520Z"
+  },
+  {
+    "id": "6708a8b2d5415ec7e9c14de5",
+    "userEmail": "john.doe@test.com",
+    "bookIDs": ["65085f739542369c3328307e"],
+    "books": [
+      {
+        "id": "65085f739542369c3328307e",
+        "title": "Moby Dick",
+        "isbn": "9780763630188",
+        "price": 2700,
+        "author": "Herman Melville",
+        "orderIDs": []
+      }
+    ],
+    "total": 2700,
+    "createdAt": "2023-09-17T14:05:28.220Z"
+  }
+]
+```
+
+Headers:
+  - `useremail: john.doe@test.com`
