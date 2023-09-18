@@ -38,26 +38,25 @@ Sending a `POST` request to the `/users` endpoint will create a user account. _T
 
 Request:
 ```
-  curl -X POST \
-    -H 'Content-Type: application/json' \
-    -d '{\
-      "email": "john.doe@test.com",\
-      "password": "testpassword"\
-    }' \
-    http://localhost:{port}/users
+curl -X POST \
+  -H 'Content-Type: application/json' \
+  -d '{\
+    "email": "john.doe@test.com",\
+    "password": "testpassword"\
+  }' \
+  http://localhost:{port}/users
 ```
 
 Response:
 
 ```
-  {
-    "address": null,
-    "id": "6508a8b2d5415ec7e9c14de5",
-    "password": "testpassword",
-    "email": "john.doe@test.com",
-    "name": null
-  }
-  {"address":null,"id":"6508a8b6d5415ec7d9c14de6","password":"testpassword","email":"test1@rosslibby.com","name":null}
+{
+  "address": null,
+  "id": "6508a8b2d5415ec7e9c14de5",
+  "password": "testpassword",
+  "email": "john.doe@test.com",
+  "name": null
+}
 ```
 
 Params:
@@ -73,8 +72,8 @@ Sending a `GET` request to the `/users/orders` endpoint will respond with a list
 
 Request:
 ```
-  curl http://localhost:{port}/users/orders \
-    -H 'useremail: john.doe@test.com'
+curl http://localhost:{port}/users/orders \
+  -H 'useremail: john.doe@test.com'
 ```
 
 Headers:
@@ -119,44 +118,43 @@ Sending a `POST` request to the `/orders` endpoint will create a new order.
 
 Request:
 ```
-  curl -X POST \
-    -H 'Content-Type: application/json' \
-    -d '{\
-      "bookIDs": ["xxxxxxxxxx", "xxxxxxxxxx", "xxxxxxxxxx", "xxxxxxxxxx"],
-      "userEmail": "john.doe@test.com"
-    }' \
-    http://localhost:{port}/orders
+curl -X POST \
+  -H 'Content-Type: application/json' \
+  -d '{\
+    "bookIDs": ["xxxxxxxxxx", "xxxxxxxxxx", "xxxxxxxxxx", "xxxxxxxxxx"],
+    "userEmail": "john.doe@test.com"
+  }' \
+  http://localhost:{port}/orders
 ```
 
 Response:
 
 ```
-  {
-    "id": "6508a8b2d5415ec7e9c14de5",
-    "userEmail": "john.doe@test.com",
-    "books": [
-      {
-        "id": "9508a8b2d5415ec7e9c14de5",
-        "title": "Call of the Wild",
-        "isbn": "9788838439018",
-        "price": 1899,
-        "author": "Jack London",
-        "orderIDs": [],
-      },
-      {
-        "id": "6608a8b2d5415ec7e9c14de5",
-        "title": "Moby Dick",
-        "isbn": "9780763630188",
-        "price": 2700,
-        "author": "Herman Melville",
-        "orderIDs": [],
-      }
-    ],
-    "password": "testpassword",
-    "email": "john.doe@test.com",
-    "name": null
-  }
-  {"address":null,"id":"6508a8b6d5415ec7d9c14de6","password":"testpassword","email":"test1@rosslibby.com","name":null}
+{
+  "id": "6508a8b2d5415ec7e9c14de5",
+  "userEmail": "john.doe@test.com",
+  "books": [
+    {
+      "id": "9508a8b2d5415ec7e9c14de5",
+      "title": "Call of the Wild",
+      "isbn": "9788838439018",
+      "price": 1899,
+      "author": "Jack London",
+      "orderIDs": [],
+    },
+    {
+      "id": "6608a8b2d5415ec7e9c14de5",
+      "title": "Moby Dick",
+      "isbn": "9780763630188",
+      "price": 2700,
+      "author": "Herman Melville",
+      "orderIDs": [],
+    }
+  ],
+  "password": "testpassword",
+  "email": "john.doe@test.com",
+  "name": null
+}
 ```
 
 Params:
