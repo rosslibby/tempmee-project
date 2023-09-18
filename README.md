@@ -11,9 +11,15 @@ This application utilizes the following:
 - **MongoDB**
 - **Express**
 
-1. Clone this repository, then install project dependencies using `npm i` or `yarn`.
-2. Define a `.env` file. A demo version exists as `.env.demo`. Just remove the `.demo` and specify your `PORT` and your MongoDB `DATABASE_URL`.
+1. Clone this repository
+2. Install project dependencies using `npm i` or `yarn`
+3. Define a `.env` file. A demo version exists as `.env.demo`. Just remove the `.demo` and specify your `PORT` and your MongoDB `DATABASE_URL`
+4. Build the application using `npm run build` or `yarn build`
+5. Test the application using `npm run test` or `yarn test`
+6. Run the application in developer mode using `npm run dev` or `yarn dev`
+7. Run the application using `npm start` or `yarn start`
 
+**Example .env**
 ```
 PORT=8080
 DATABASE_URL=mongodb+srv://<user>:<password>@<cluster>.mongodb.net/<database>
@@ -35,7 +41,7 @@ Request:
   curl -X POST \
     -H 'Content-Type: application/json' \
     -d '{\
-      "email": "test1@rosslibby.com",\
+      "email": "john.doe@test.com",\
       "password": "testpassword"\
     }' \
     http://localhost:{port}/users
@@ -47,7 +53,7 @@ Response:
   {
     "address": null,
     "id": "6508a8b2d5415ec7e9c14de5",
-    "password": "testpassworddata",
+    "password": "testpassword",
     "email": "john.doe@test.com",
     "name": null
   }
