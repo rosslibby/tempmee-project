@@ -13,11 +13,14 @@ This application utilizes the following:
 
 1. Clone this repository
 2. Install project dependencies using `npm i` or `yarn`
-3. Define a `.env` file. A demo version exists as `.env.demo`. Just remove the `.demo` and specify your `PORT` and your MongoDB `DATABASE_URL`
-4. Build the application using `npm run build` or `yarn build`
-5. Test the application using `npm run test` or `yarn test`
-6. Run the application in developer mode using `npm run dev` or `yarn dev`
-7. Run the application using `npm start` or `yarn start`
+3. Define a `.env` file. A demo version exists as `.env.demo`. Just remove the `.demo` suffix
+4. Specify your `PORT`
+5. Specify your MongoDB `DATABASE_URL`
+6. Generate the database collections using Prisma: `npx prisma generate`
+7. Build the application using `npm run build` or `yarn build`
+8. Test the application using `npm run test` or `yarn test`
+9a. Run the application in developer mode using `npm run dev` or `yarn dev`
+9b. Run the application using `npm start` or `yarn start`
 
 **Example .env**
 ```bash
@@ -25,9 +28,7 @@ PORT=8080
 DATABASE_URL=mongodb+srv://<user>:<password>@<cluster>.mongodb.net/<database>
 ```
 
-# API
-
-## Routes
+# API routes
 
 ## User `/users`
 
@@ -154,9 +155,9 @@ Request:
 ```bash
 curl -X POST \
   -H 'Content-Type: application/json' \
+  -H 'useremail: john.doe@test.com' \
   -d '{\
     "bookIDs": ["xxxxxxxxxx", "xxxxxxxxxx", "xxxxxxxxxx", "xxxxxxxxxx"],
-    "userEmail": "john.doe@test.com"
   }' \
   http://localhost:{port}/orders
 ```
@@ -192,8 +193,10 @@ Response:
 ```
 
 Params:
-  - `email`: string, required
   - `password`: string, required
+
+Headers:
+  - `useremail: {email_address}`
 
 **Get a user's order history**
 ```bash
@@ -249,4 +252,4 @@ Response:
 ```
 
 Headers:
-  - `useremail: john.doe@test.com`
+  - `useremail: {email_address}`
