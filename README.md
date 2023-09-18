@@ -30,7 +30,7 @@ DATABASE_URL=mongodb+srv://<user>:<password>@<cluster>.mongodb.net/<database>
 
 # API routes
 
-## User `/users`
+## Users `/users`
 
 **Create a user**
 ```bash
@@ -68,7 +68,7 @@ Params:
 Headers:
   - `Content-Type: application/json`
 
-**View order history**
+**View a user's order history**
 `GET /users/orders`
 
 Sending a `GET` request to the `/users/orders` endpoint will respond with a list of the specified user's orders. Pass the `useremail` header to specify the user account for which orders are requested.
@@ -82,7 +82,7 @@ curl http://localhost:{port}/users/orders \
 Headers:
   - `useremail: {email_address}`
 
-## User `/users`
+## Books `/books`
 
 **View list of books**
 ```bash
@@ -142,7 +142,7 @@ Response:
 },
 ```
 
-## Order `/orders`
+## Orders `/orders`
 
 **Create an order**
 ```bash
